@@ -16,6 +16,12 @@ public class PosMachine {
         return items.stream()
                 .collect(Collectors.toMap(Item::getBarcode, item -> item));
     }
+
+    private Map<String, Integer> calculateItemsCost(List<String> barcodes) {
+        return barcodes.stream()
+                .collect(Collectors.groupingBy(barcode -> barcode, Collectors.summingInt(b -> 1)));
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
