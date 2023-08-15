@@ -22,6 +22,15 @@ public class PosMachine {
                 .collect(Collectors.groupingBy(barcode -> barcode, Collectors.summingInt(b -> 1)));
     }
 
+    private int calculateTotalPrice(Map<String, Integer> itemCounts) {
+        return itemCounts.entrySet().stream()
+                .mapToInt(entry -> {
+                    Item item = itemMap.get(entry.getKey());
+                    return (item != null) ? item.getPrice() * entry.getValue() : 0;
+                })
+                .sum();
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
