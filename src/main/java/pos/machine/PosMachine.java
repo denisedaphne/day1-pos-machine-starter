@@ -57,6 +57,13 @@ public class PosMachine {
     }
 
     public String printReceipt(List<String> barcodes) {
-        return null;
+        if (barcodes == null || barcodes.isEmpty()) {
+            return "";
+        }
+
+        Map<String, Integer> itemCounts = calculateItemsCost(barcodes);
+        int totalAmount = calculateTotalPrice(itemCounts);
+        String itemsReceipt = generateItemsReceipt(itemCounts);
+        return generateReceipt(totalAmount, itemsReceipt);
     }
 }
