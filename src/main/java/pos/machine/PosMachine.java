@@ -31,6 +31,23 @@ public class PosMachine {
                 .sum();
     }
 
+    private String generateItemsReceipt(Map<String, Integer> itemCounts) {
+        return itemCounts.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(entry -> {
+                    String barcode = entry.getKey();
+                    int quantity = entry.getValue();
+                    Item item = itemMap.get(barcode);
+                    if (item != null) {
+                        int subtotal = item.getPrice() * quantity;
+                        return String.format("Name: %s, Quantity: %d, Unit price: %d (yuan), Subtotal: %d (yuan)\n",
+                                item.getName(), quantity, item.getPrice(), subtotal);
+                    }
+                    return "";
+                })
+                .collect(Collectors.joining());
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
