@@ -48,6 +48,14 @@ public class PosMachine {
                 .collect(Collectors.joining());
     }
 
+    private String generateReceipt(int totalAmount, String itemsReceipt) {
+        return "***<store earning no money>Receipt***\n" +
+                itemsReceipt +
+                "----------------------\n" +
+                String.format("Total: %d (yuan)\n", totalAmount) +
+                "**********************";
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
